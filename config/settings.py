@@ -41,6 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    #PYPI패키지
+    'django_extensions',
+
     # 이 패키지는 application 취급
     'blog'
 ]
