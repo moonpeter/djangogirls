@@ -1,5 +1,6 @@
-from django.http import HttpResponse
-from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse
 
 from blog.models import Post
 
@@ -14,7 +15,7 @@ def post_list(request):
     #    hint) Post.objects.무언가.....를 실행한 결과는 QuerySet객체가 된다
     # 2. context라는 dict를 생성하며, 'posts'키에 위 posts변수를 value로 사용하도록 한다.
     # 3. render의 3번째 위치인자로 위 context변수를 전달한다.
-    posts = Post.objects.all()
+    posts = Post.objects.order_by('-pk')
     context = {
         'posts': posts,
     }
@@ -51,8 +52,9 @@ def post_add(request):
             title=title,
             text=text,
         )
-
         result = f'title: {post.title}, created_date: {post.created_date}'
-        return HttpResponse(result)
+        # post_list_url = reverse('url-name-post-list')
+        # return HttpResponseRedirect('/posts/')
+        return redirect('url-name-post-list')
     else:
         return render(request, 'post_add.html')
