@@ -20,9 +20,15 @@ def post_list(request):
 
     return render(request, 'post_list.html', context)
 
+def post_detail(request, pk):
+    print('post_detail request', request)
+    print('post)detail pk', pk)
+    try:
+        post = Post.objects.get(pk=pk)
+    except:
+        return HttpResponse('없음')
+    post = get_object_or_404(Post, pk=pk)
 
-def post_detail(request):
-    post = Post.objects.all()[0]
     context = {
         'post': post,
     }
