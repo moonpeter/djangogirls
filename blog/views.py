@@ -41,4 +41,18 @@ def post_detail(request, pk):
 
 
 def post_add(request):
-    return render(request, 'post_add.html')
+    if request.method == 'POST':
+        author = request.user
+        title = request.POST['title']
+        text = request.POST['text']
+
+        post = Post.objects.create(
+            author=author,
+            title=title,
+            text=text,
+        )
+
+        result = f'title: {post.title}, created_date: {post.created_date}'
+        return HttpResponse(result)
+    else:
+        return render(request, 'post_add.html')
