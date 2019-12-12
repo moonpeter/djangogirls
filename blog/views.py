@@ -38,3 +38,7 @@ def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
 
     return render(request, 'post_detail.html', context)
+
+
+def post_add(request):
+    return render(request, 'post_add.html')
