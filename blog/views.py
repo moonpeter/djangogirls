@@ -24,8 +24,6 @@ def post_list(request):
 
 
 def post_detail(request, pk):
-    print('post_detail request', request)
-    print('post)detail pk', pk)
 
     try:
         post = Post.objects.get(pk=pk)
@@ -58,3 +56,11 @@ def post_add(request):
         return redirect('url-name-post-list')
     else:
         return render(request, 'post_add.html')
+
+
+def post_delete(reqeust, pk):
+    if reqeust.method == 'POST':
+        post = Post.objects.get(pk=pk)
+        post.delete()
+
+        return redirect('url-name-post-list')

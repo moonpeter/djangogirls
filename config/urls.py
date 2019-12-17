@@ -17,11 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from blog.views import post_list, post_detail, post_add
+from blog.views import post_list, post_detail, post_add, post_delete
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('posts/', post_list, name='url-name-post-list'),
-    path('post-detail/<int:pk>/', post_detail, name='url-name-post-detail'),
-    path('post-add/', post_add, name='url-name-post-add'),
+    path('posts/<int:pk>/', post_detail, name='url-name-post-detail'),
+    path('posts/<int:pk>/delete/', post_delete, name='url-name-post-delete'),
+    path('posts/add/', post_add, name='url-name-post-add'),
 ]
